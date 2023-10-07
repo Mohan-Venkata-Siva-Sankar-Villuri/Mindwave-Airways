@@ -1,40 +1,174 @@
 import React from "react";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import CallIcon from "@mui/icons-material/Call";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
+import EventIcon from "@mui/icons-material/Event";
+import FlightClassIcon from "@mui/icons-material/FlightClass";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
-const Confirmation = ({ formData, onConfirm }) => {
+const Confirmation = ({ formData, flightData, onConfirm }) => {
+  console.log(formData, "formData");
   return (
-    <div>
-      <Typography variant="h6">Personal Details</Typography>
-      <Typography>
-        First Name: {formData?.firstName}
-        <br />
-        Last Name: {formData?.lastName}
-        <br />
-        Email: {formData?.email}
-        <br />
-        Phone Number: {formData?.phoneNumber}
-        <br />
+    <Box
+      sx={{
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "20px",
+        minWidth: "70vw",
+      }}
+    >
+      <Typography sx={{ padding: "20px", color: "#524f4f" }}>
+        Please verify the following information before confirming your flights.
       </Typography>
-
-      <Typography variant="h6">Flight Details</Typography>
-      <Typography>
-        Departure City: {FlightLandIcon} {formData?.departureCity}
-        <br />
-        Destination City: {formData?.destinationCity}
-        <br />
-        Departure Date: {formData?.departureDate}
-        <br />
-        Return Date: {formData?.returnDate}
-        <br />
-        Flight Class: {formData?.flightClass}
-        <br />
-        Number of Passengers: {formData?.numPassengers}
-        <br />
-      </Typography>
-
-      <Button onClick={onConfirm}>Confirm</Button>
-    </div>
+      <Box sx={{ display: "flex", gap: "10%", color: "#1776D2" }}>
+        <Box>
+          <Typography
+            sx={{ padding: "20px", textTransform: "uppercase" }}
+            variant="h6"
+          >
+            Personal Details
+          </Typography>
+          <Typography sx={{ padding: "20px" }}>
+            <Box sx={{ display: "flex", gap: "10px" }}>
+              <AccountCircleIcon />
+              <Typography sx={{ color: "#524f4f" }}>
+                {formData?.firstName} {formData?.lastName}
+              </Typography>
+            </Box>
+            <br />
+            <Box sx={{ display: "flex", gap: "10px" }}>
+              <EmailIcon />
+              <Typography sx={{ color: "#524f4fk" }}>
+                {formData?.email}
+              </Typography>
+            </Box>
+            <br />
+            <Box sx={{ display: "flex", gap: "10px" }}>
+              <CallIcon />
+              <Typography sx={{ color: "#524f4f" }}>
+                {formData?.phoneNumber}
+              </Typography>
+            </Box>
+            <br />
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            sx={{ padding: "15px", textTransform: "uppercase" }}
+            variant="h6"
+          >
+            Flight Details
+          </Typography>
+          <Box sx={{ display: "flex" }}>
+            <Box sx={{ padding: "20px" }}>
+              Departure City
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "10px",
+                  alignItems: "center",
+                }}
+              >
+                <FlightTakeoffIcon />
+                <Typography sx={{ color: "#524f4f" }}>
+                  {flightData?.departureCity}
+                </Typography>
+              </Box>
+              <br />
+              Destination City
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "10px",
+                  alignItems: "center",
+                }}
+              >
+                <FlightLandIcon />
+                <Typography sx={{ color: "#524f4f" }}>
+                  {flightData?.destinationCity}
+                </Typography>
+              </Box>
+              <br />
+              Departure Date
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "10px",
+                  alignItems: "center",
+                }}
+              >
+                <EventIcon />
+                <Typography sx={{ color: "#524f4f" }}>
+                  {flightData?.departureDate}
+                </Typography>
+              </Box>
+              <br />
+              Return Date
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "10px",
+                  alignItems: "center",
+                }}
+              >
+                <EventIcon />
+                <Typography sx={{ color: "#524f4f" }}>
+                  {flightData?.returnDate}
+                </Typography>
+              </Box>
+              <br />
+            </Box>
+            <Box sx={{ padding: "20px" }}>
+              Flight Class
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "10px",
+                  alignItems: "center",
+                }}
+              >
+                <FlightClassIcon />
+                <Typography sx={{ color: "#524f4f" }}>
+                  {flightData?.flightClass}
+                </Typography>
+              </Box>
+              <br />
+              Number of Passengers
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "10px",
+                  alignItems: "center",
+                }}
+              >
+                <PeopleAltIcon />
+                <Typography sx={{ color: "#524f4f" }}>
+                  {flightData?.numPassengers}
+                </Typography>
+              </Box>
+              <br />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Button
+        variant="contained"
+        color="success"
+        sx={{ float: "right" }}
+        onClick={onConfirm}
+      >
+        Confirm
+      </Button>
+    </Box>
   );
 };
 

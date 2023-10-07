@@ -8,10 +8,15 @@ import Typography from "@mui/material/Typography";
 import FlightDetails from "./FlightDetails";
 import Confirmation from "./Confirmation";
 import PersonalInformation from "./PersonalInformation";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const steps = ["Personal Information", "Flight Details", "Confirmation"];
 
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper({ setConfirmationPage }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const [formData, setFormData] = React.useState({
@@ -21,6 +26,14 @@ export default function HorizontalLinearStepper() {
     phoneNumber: "",
   });
   const [errors, setErrors] = React.useState({});
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -54,6 +67,14 @@ export default function HorizontalLinearStepper() {
     }
   };
 
+  const onConfirm = () => {
+    handleClickOpen();
+  };
+
+  const finalTicketConfirmationHandler = () => {
+    setConfirmationPage(true);
+  };
+
   const submitHandler = () => {
     const newErrors = {};
     if (!formData.firstName) {
@@ -83,18 +104,6 @@ export default function HorizontalLinearStepper() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
   };
 
   const handleReset = () => {
@@ -168,12 +177,16 @@ export default function HorizontalLinearStepper() {
 
   return (
     <Box sx={{ marginTop: "30px" }}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        style={{ width: "70%", marginLeft: "230px" }}
+      >
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
-            labelProps.optional = <Typography variant="caption"></Typography>;
+            labelProps.optional = <Typography variant="caption" />;
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -223,7 +236,11 @@ export default function HorizontalLinearStepper() {
                 handleFlightDetailsSubmit={handleFlightDetailsSubmit}
               />
             ) : (
-              <Confirmation />
+              <Confirmation
+                flightData={flightData}
+                formData={formData}
+                onConfirm={onConfirm}
+              />
             )}
           </Box>
           <Box
@@ -241,28 +258,55 @@ export default function HorizontalLinearStepper() {
                 width: "60vw",
               }}
             >
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              {isStepOptional(activeStep) && (
-                <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                  Skip
+              {activeStep !== 2 && (
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  Back
                 </Button>
               )}
-
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
+              <Box sx={{ flex: "1 1 auto" }} />
+              {activeStep !== 2 && (
+                <Button onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
+              )}
             </Box>
           </Box>
         </React.Fragment>
       )}
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Confirm Tickets?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to confirm your flight reservation?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                handleClose();
+                finalTicketConfirmationHandler();
+              }}
+              autoFocus
+            >
+              Yes
+            </Button>
+            <Button onClick={handleClose}>No</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Box>
   );
 }

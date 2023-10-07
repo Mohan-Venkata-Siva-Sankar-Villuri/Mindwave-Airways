@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import {
   TextField,
-  Button,
   Grid,
   Box,
   Select,
@@ -71,13 +69,13 @@ const FlightDetails = ({
         backgroundColor: "white",
         padding: "20px",
         borderRadius: "20px",
-        width: "60vw",
+        maxWidth: "70vw",
       }}
     >
-      <form onSubmit={submitHandler}>
+      <form style={{ padding: "20px 15px 35px 20px" }} onSubmit={submitHandler}>
         <Grid container spacing={1}>
           <Grid item xs={3}>
-            <FormControl variant="standard" sx={{ minWidth: 160 }}>
+            <FormControl variant="standard" sx={{ minWidth: 130 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 Select your departure city
               </InputLabel>
@@ -85,6 +83,7 @@ const FlightDetails = ({
                 name="departureCity"
                 id="demo-simple-select"
                 value={flightData.departureCity}
+                style={{ width: "220px" }}
                 label="Select your departure city"
                 onChange={changeHandler}
                 error={Boolean(FlightDetailsErrors.departureCity)}
@@ -99,7 +98,7 @@ const FlightDetails = ({
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" sx={{ minWidth: 160 }}>
+            <FormControl variant="standard" sx={{ minWidth: 100 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 Select your destination city
               </InputLabel>
@@ -107,6 +106,7 @@ const FlightDetails = ({
                 name="destinationCity"
                 id="demo-simple-select"
                 value={flightData.destinationCity}
+                style={{ width: "220px" }}
                 label="Select your departure city"
                 onChange={changeHandler}
                 error={Boolean(FlightDetailsErrors.destinationCity)}
@@ -125,6 +125,7 @@ const FlightDetails = ({
               name="departureDate"
               label="Departure Field"
               type="date"
+              style={{ width: "200px" }}
               variant="standard"
               fullWidth
               InputLabelProps={{
@@ -143,6 +144,7 @@ const FlightDetails = ({
               name="returnDate"
               label="Return Date"
               type="date"
+              style={{ width: "250px" }}
               variant="standard"
               fullWidth
               InputLabelProps={{
@@ -157,7 +159,7 @@ const FlightDetails = ({
             />
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" sx={{ minWidth: 160 }}>
+            <FormControl variant="standard" sx={{ minWidth: 130 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 Select your First class
               </InputLabel>
@@ -165,6 +167,7 @@ const FlightDetails = ({
                 name="flightClass"
                 id="demo-simple-select"
                 value={flightData.flightClass}
+                style={{ width: "220px" }}
                 label="Select your departure city"
                 onChange={changeHandler}
                 error={Boolean(FlightDetailsErrors.flightClass)}
@@ -183,17 +186,13 @@ const FlightDetails = ({
               label="Number of Passengers"
               name="numPassengers"
               value={flightData.numPassengers}
+              style={{ width: "220px" }}
               onChange={changeHandler}
               error={Boolean(FlightDetailsErrors.numPassengers)}
               helperText={FlightDetailsErrors.numPassengers}
-              required
               variant="standard"
             />
           </Grid>
-
-          {/* <Grid item xs={12}>
-            <Button type="submit">Next</Button>
-          </Grid> */}
         </Grid>
       </form>
     </Box>

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { TextField, Button, Grid, Card, Box } from "@mui/material";
+import { TextField, Grid, Box } from "@mui/material";
 
 const PersonalInformation = ({
   changeHandler,
@@ -13,10 +12,10 @@ const PersonalInformation = ({
         backgroundColor: "white",
         padding: "20px",
         borderRadius: "20px",
-        width: "60vw",
+        maxWidth: "70vw",
       }}
     >
-      <form>
+      <form style={{ padding: "20px 15px 35px 20px" }}>
         <Grid container spacing={1}>
           <Grid item xs={4}>
             <TextField
@@ -24,9 +23,9 @@ const PersonalInformation = ({
               name="firstName"
               value={formData.firstName}
               onChange={changeHandler}
+              style={{ width: "250px" }}
               error={Boolean(errors.firstName)}
               helperText={errors.firstName}
-              required
               variant="standard"
             />
           </Grid>
@@ -36,9 +35,9 @@ const PersonalInformation = ({
               name="lastName"
               value={formData.lastName}
               onChange={changeHandler}
+              style={{ width: "250px" }}
               error={Boolean(errors.lastName)}
               helperText={errors.lastName}
-              required
               variant="standard"
             />
           </Grid>
@@ -49,9 +48,9 @@ const PersonalInformation = ({
               type="email"
               value={formData.email}
               onChange={changeHandler}
+              style={{ width: "250px" }}
               error={Boolean(errors.email)}
               helperText={errors.email}
-              required
               variant="standard"
             />
           </Grid>
@@ -61,9 +60,9 @@ const PersonalInformation = ({
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={changeHandler}
+              style={{ width: "250px" }}
               error={Boolean(errors.phoneNumber)}
               helperText={errors.phoneNumber}
-              required
               variant="standard"
             />
           </Grid>
