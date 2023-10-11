@@ -6,6 +6,7 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  FormHelperText,
 } from "@mui/material";
 const FlightDetails = ({
   setFlightData,
@@ -14,7 +15,6 @@ const FlightDetails = ({
   onNext,
   FlightDetailsErrors,
   setFlightDetailsErrors,
-  handleFlightDetailsSubmit,
 }) => {
   const submitHandler = (e) => {
     e.preventDefault();
@@ -27,10 +27,13 @@ const FlightDetails = ({
     if (!flightData.destinationCity) {
       newErrors.destinationCity = "Destination City is required.";
     }
-    // Add more validation rules for other fields
+
+    if (!flightData.flightClass) {
+      newErrors.flightClass = "Select your flight class is required.";
+    }
 
     if (Object.keys(newErrors).length === 0) {
-      onNext({ ...personalData, ...flightData }); // Combine personal and flight data
+      onNext({ ...personalData, ...flightData });
     } else {
       setFlightDetailsErrors(newErrors);
     }
@@ -56,7 +59,7 @@ const FlightDetails = ({
       ...flightData,
       [name]: value,
     });
-    // Remove FlightDetailsErrors when a field is changed
+
     setFlightDetailsErrors({
       ...FlightDetailsErrors,
       [name]: false,
@@ -69,11 +72,11 @@ const FlightDetails = ({
         backgroundColor: "white",
         padding: "20px",
         borderRadius: "20px",
-        maxWidth: "70vw",
+        maxWidth: "75vw",
         fontFamily: "Work Sans",
       }}
     >
-      <form style={{ padding: "20px 15px 35px 20px" }} onSubmit={submitHandler}>
+      <form style={{ padding: "30px 20px 30px 20px" }} onSubmit={submitHandler}>
         <Grid container spacing={1}>
           <Grid item xs={3}>
             <FormControl variant="standard" sx={{ minWidth: 130 }}>
@@ -88,7 +91,6 @@ const FlightDetails = ({
                 label="Select your departure city"
                 onChange={changeHandler}
                 error={Boolean(FlightDetailsErrors.departureCity)}
-                helperText={FlightDetailsErrors.departureCity}
               >
                 {cityDetails.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -96,6 +98,11 @@ const FlightDetails = ({
                   </MenuItem>
                 ))}
               </Select>
+              {Boolean(FlightDetailsErrors.departureCity) && (
+                <FormHelperText style={{ color: "#d32f2f" }}>
+                  {"Departure City is required"}
+                </FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={3}>
@@ -108,10 +115,9 @@ const FlightDetails = ({
                 id="demo-simple-select"
                 value={flightData.destinationCity}
                 style={{ width: "220px" }}
-                label="Select your departure city"
+                label="Select your destination city"
                 onChange={changeHandler}
                 error={Boolean(FlightDetailsErrors.destinationCity)}
-                helperText={FlightDetailsErrors.destinationCity}
               >
                 {cityDetails.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -119,12 +125,17 @@ const FlightDetails = ({
                   </MenuItem>
                 ))}
               </Select>
+              {Boolean(FlightDetailsErrors.destinationCity) && (
+                <FormHelperText style={{ color: "#d32f2f" }}>
+                  {"Destination City is required"}
+                </FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={3}>
             <TextField
               name="departureDate"
-              label="Departure Field"
+              label="Departure Date"
               type="date"
               style={{ width: "200px" }}
               variant="standard"
@@ -136,7 +147,8 @@ const FlightDetails = ({
               onChange={changeHandler}
               error={FlightDetailsErrors.departureDate}
               helperText={
-                FlightDetailsErrors.departureDate && "This field is required"
+                FlightDetailsErrors.departureDate &&
+                "Departure Date is required"
               }
             />
           </Grid>
@@ -155,14 +167,14 @@ const FlightDetails = ({
               onChange={changeHandler}
               error={FlightDetailsErrors.returnDate}
               helperText={
-                FlightDetailsErrors.returnDate && "This field is required"
+                FlightDetailsErrors.returnDate && "Return Date is required"
               }
             />
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" sx={{ minWidth: 130 }}>
               <InputLabel id="demo-simple-select-standard-label">
-                Select your First class
+                Select your Flight class
               </InputLabel>
               <Select
                 name="flightClass"
@@ -172,7 +184,6 @@ const FlightDetails = ({
                 label="Select your departure city"
                 onChange={changeHandler}
                 error={Boolean(FlightDetailsErrors.flightClass)}
-                helperText={FlightDetailsErrors.flightClass}
               >
                 {FlightDetails.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -180,6 +191,11 @@ const FlightDetails = ({
                   </MenuItem>
                 ))}
               </Select>
+              {Boolean(FlightDetailsErrors.flightClass) && (
+                <FormHelperText style={{ color: "#d32f2f" }}>
+                  {"Flight Class is required"}
+                </FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={3}>
@@ -190,7 +206,10 @@ const FlightDetails = ({
               style={{ width: "220px" }}
               onChange={changeHandler}
               error={Boolean(FlightDetailsErrors.numPassengers)}
-              helperText={FlightDetailsErrors.numPassengers}
+              helperText={
+                FlightDetailsErrors.numPassengers &&
+                "Number of Passengers is required"
+              }
               variant="standard"
             />
           </Grid>

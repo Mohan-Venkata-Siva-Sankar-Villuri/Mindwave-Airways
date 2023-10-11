@@ -62,10 +62,6 @@ const PersonalInformation = ({ changeHandler, formData, errors }) => {
               variant="standard"
             />
           </Grid>
-
-          {/* <Grid item xs={12}>
-            <Button type="submit">Next</Button>
-          </Grid> */}
         </Grid>
       </form>
     </Box>
