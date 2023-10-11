@@ -1,11 +1,6 @@
 import { TextField, Grid, Box } from "@mui/material";
 
-const PersonalInformation = ({
-  changeHandler,
-  formData,
-  errors,
-  setFormData,
-}) => {
+const PersonalInformation = ({ changeHandler, formData, errors }) => {
   return (
     <Box
       sx={{
@@ -13,6 +8,7 @@ const PersonalInformation = ({
         padding: "20px",
         borderRadius: "20px",
         maxWidth: "70vw",
+        fontFamily: "Work Sans",
       }}
     >
       <form style={{ padding: "20px 15px 35px 20px" }}>

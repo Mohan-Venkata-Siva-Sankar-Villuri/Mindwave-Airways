@@ -18,9 +18,17 @@ const Confirmation = ({ formData, flightData, onConfirm }) => {
         padding: "20px",
         borderRadius: "20px",
         minWidth: "70vw",
+        fontFamily: "Work Sans",
       }}
     >
-      <Typography sx={{ padding: "20px", color: "#524f4f" }}>
+      <Typography
+        sx={{
+          padding: "20px",
+          color: "#524f4f",
+          fontSize: "15px",
+          fontFamily: "Work Sans",
+        }}
+      >
         Please verify the following information before confirming your flights.
       </Typography>
       <Box sx={{ display: "flex", gap: "10%", color: "#1776D2" }}>
@@ -41,7 +49,7 @@ const Confirmation = ({ formData, flightData, onConfirm }) => {
             <br />
             <Box sx={{ display: "flex", gap: "10px" }}>
               <EmailIcon />
-              <Typography sx={{ color: "#524f4fk" }}>
+              <Typography sx={{ color: "#524f4f" }}>
                 {formData?.email}
               </Typography>
             </Box>
@@ -57,7 +65,7 @@ const Confirmation = ({ formData, flightData, onConfirm }) => {
         </Box>
         <Box>
           <Typography
-            sx={{ padding: "15px", textTransform: "uppercase" }}
+            sx={{ padding: "20px", textTransform: "uppercase" }}
             variant="h6"
           >
             Flight Details

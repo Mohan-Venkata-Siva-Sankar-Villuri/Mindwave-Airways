@@ -70,6 +70,7 @@ const FlightDetails = ({
         padding: "20px",
         borderRadius: "20px",
         maxWidth: "70vw",
+        fontFamily: "Work Sans",
       }}
     >
       <form style={{ padding: "20px 15px 35px 20px" }} onSubmit={submitHandler}>

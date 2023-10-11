@@ -109,6 +109,17 @@ export default function HorizontalLinearStepper({ setConfirmationPage }) {
   const handleReset = () => {
     setActiveStep(0);
   };
+  // const handleSkip = () => {
+  //   if (!isStepOptional(activeStep)) {
+  //     throw new Error("You can't skip a step that isn't optional.");
+  //   }
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   setSkipped((prevSkipped) => {
+  //     const newSkipped = new Set(prevSkipped.values());
+  //     newSkipped.add(activeStep);
+  //     return newSkipped;
+  //   });
+  // };
 
   const changeHandler = (e) => {
     setFormData({
@@ -269,6 +280,11 @@ export default function HorizontalLinearStepper({ setConfirmationPage }) {
                 </Button>
               )}
               <Box sx={{ flex: "1 1 auto" }} />
+              {/* {isStepOptional(activeStep) && (
+                <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                  Skip
+                </Button>
+              )} */}
               {activeStep !== 2 && (
                 <Button onClick={handleNext}>
                   {activeStep === steps.length - 1 ? "Finish" : "Next"}
@@ -284,6 +300,7 @@ export default function HorizontalLinearStepper({ setConfirmationPage }) {
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+          sx={{ fontFamily: "Work Sans" }}
         >
           <DialogTitle id="alert-dialog-title">
             {"Confirm Tickets?"}

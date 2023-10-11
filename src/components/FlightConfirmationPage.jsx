@@ -16,7 +16,9 @@ const FlightConfirmationPage = () => {
       }}
     >
       <CheckCircleIcon sx={{ color: "white" }} />
-      <Typography sx={{ color: "white" }}>
+      <Typography
+        sx={{ color: "white", fontSize: "30px", fontFamily: "Work Sans" }}
+      >
         Your flight has been confirmed!
       </Typography>
     </Box>
