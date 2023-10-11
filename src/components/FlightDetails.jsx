@@ -20,18 +20,6 @@ const FlightDetails = ({
     e.preventDefault();
     const newErrors = {};
 
-    if (!flightData.departureCity) {
-      newErrors.departureCity = "Departure City is required.";
-    }
-
-    if (!flightData.destinationCity) {
-      newErrors.destinationCity = "Destination City is required.";
-    }
-
-    if (!flightData.flightClass) {
-      newErrors.flightClass = "Select your flight class is required.";
-    }
-
     if (Object.keys(newErrors).length === 0) {
       onNext({ ...personalData, ...flightData });
     } else {
